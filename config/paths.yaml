@@ -1,0 +1,55 @@
+# config/paths.yaml - FILE PATHS & DIRECTORIES
+# Migrated from: config/settings.py
+
+# Base Directories
+directories:
+  project_root: .  # Will be resolved at runtime
+  data:
+    raw: data/raw
+    processed: data/processed
+    historical: data/historical
+    storage: data/storage
+  logs: logs
+  outputs: outputs
+  reports: outputs/reports
+
+# CSV File Detection Priority
+csv_detection:
+  priority_folders:
+    - data/raw
+    - .  # project root
+  priority_keywords:
+    - recap
+    - sinyal
+    - trading
+    - signal
+  fallback_pattern: "*.csv"
+
+# Output Files
+output_files:
+  database: data/processed/support_levels.json
+  validation_results: data/validation_results/latest.json
+  execution_log: logs/database_builder.log
+  performance_tracking: deployment/performance_tracking.csv
+  trade_journal: deployment/trade_journal.csv
+
+# Column Mapping (dari CSV input)
+csv_columns:
+  date: Tanggal Kirim
+  market: Market
+  buy: BUY
+  sell: SELL
+  tp: TP
+  events: Events
+  avg_days: Avg Days
+  longest_days: Longest Days
+
+# Scoring Configuration
+scoring:
+  weights:
+    events: 0.7
+    recovery_days: 0.3
+  quality_thresholds:
+    high: 0.7
+    medium: 0.5
+    low: 0.3

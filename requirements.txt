@@ -1,0 +1,33 @@
+# requirements.txt
+
+# Core Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# HTTP & API
+requests>=2.31.0
+python-binance>=1.0.17
+
+# Configuration
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Storage & Caching
+redis>=4.5.0
+
+# Analysis & ML
+scikit-learn>=1.3.0
+statsmodels>=0.14.0
+
+# Web & Monitoring
+flask>=2.3.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Utilities
+pathlib>=1.0.1

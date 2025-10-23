@@ -1,0 +1,98 @@
+# config/strategies.yaml - TRADING STRATEGY CONFIGURATION
+# Migrated from: config/trading_strategy.py
+
+# Strategy Metadata
+metadata:
+  name: "Support Level Bounce Trading"
+  version: "1.0"
+  author: "Quant Team"
+  description: "Buy at support levels, sell at bounce targets"
+  last_updated: "2025-01-06"
+
+# Entry Rules
+entry:
+  timeframe: 4h
+  
+  support_detection:
+    method: rolling_local_minima
+    window_size: 5
+    min_touches: 3
+    lookback_periods: 100
+  
+  bounce_conditions:
+    touch_tolerance: 0.01      # 1% price zone
+    bounce_threshold: 0.005    # 0.5% minimum bounce
+    confirmation_candles: 1
+    volume_confirmation: true
+    volume_threshold: 1.2      # 120% of average volume
+
+# Exit Rules
+exit:
+  profit_target: 0.03          # 3% target
+  stop_loss: 0.015             # 1.5% stop loss
+  time_exit: 24                # hours (exit if no profit after 24h)
+  trailing_stop:
+    enabled: true
+    activation: 0.02           # Activate after 2% profit
+    distance: 0.01             # 1% trailing distance
+
+# Risk Management
+risk:
+  position_sizing:
+    method: kelly_fraction     # Options: kelly_fraction, fixed_percentage, volatility_adjusted
+    kelly_fraction: 0.5        # Half Kelly for safety
+    max_position: 0.05         # 5% max per position
+    min_position: 0.01         # 1% min per position
+  
+  portfolio:
+    max_portfolio_risk: 0.02   # 2% total portfolio at risk
+    max_drawdown_limit: 0.25   # 25% max drawdown
+    correlation_limit: 0.7     # Max correlation between positions
+    max_open_positions: 5
+
+# Validation Parameters
+validation:
+  min_success_rate: 0.65       # 65% minimum win rate
+  min_sample_size: 30          # Minimum 30 trades for validation
+  walkforward_windows: 10
+  confidence_level: 0.95
+  required_regimes:
+    - bull
+    - bear
+    - sideways
+    - high_volatility
+
+# Coin Selection Criteria
+selection:
+  exchange: binance
+  quote_asset: USDT
+  
+  filters:
+    min_daily_volume: 1000000  # $1M minimum
+    min_price: 0.01            # Avoid dust coins
+    max_price: null            # No upper limit
+    
+  market_cap_tiers:
+    - large
+    - mid
+    - small
+  
+  blacklist:
+    - BTCUSDT              # Too stable
+    - ETHUSDT              # Too stable
+    - BUSDUSDT             # Stablecoin
+    - USDCUSDT             # Stablecoin
+  
+  priority_coins:
+    - BNBUSDT
+    - ADAUSDT
+    - DOTUSDT
+    - LINKUSDT
+    - MATICUSDT
+
+# Backtesting Configuration
+backtest:
+  initial_capital: 10000
+  commission: 0.001            # 0.1% per trade
+  slippage: 0.0005             # 0.05% slippage
+  use_realistic_fills: true

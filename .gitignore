@@ -1,0 +1,32 @@
+# Environment
+.env
+.venv
+env/
+trading_env/
+venv/
+
+# Backup files  
+*_backup*
+backup/
+
+# Logs
+*.log
+logs/
+
+# VS Code
+.vscode/
+
+# API Keys
+*_key.txt
+*_token.txt
+config.json
+
+# Data files (jangan upload data real)
+data/raw/
+data/processed/
+*.csv
+*.json
+
+# Python
+__pycache__/
+*.pyc
