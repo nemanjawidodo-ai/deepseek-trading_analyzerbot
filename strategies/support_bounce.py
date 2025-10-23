@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List, Optional
 from .base import BaseStrategy
-
+from config.config_loader import load_strategies
 class SupportBounceStrategy(BaseStrategy):
     """Strategy berdasarkan support level bounce detection dengan statistical edge"""
     
